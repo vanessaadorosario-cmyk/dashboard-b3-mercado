@@ -496,6 +496,31 @@ footer {
             <div class="card-variation">-0,80% (minimo 2 anos)</div>
         </div>
     </div>
+    
+<!-- FAROL - Sentimento do Mercado -->
+<div class="farol-container">
+    <h3>FAROL DE MERCADO</h3>
+    <div class="farol-grid" id="farol-grid">
+        <div class="farol-item farol-amarelo" id="farol-indices">
+            <div class="farol-asset">ÍNDICES</div>
+            <div class="farol-valor" id="farol-indices-status">AMARELO</div>
+            <div class="farol-desc">Aguardando Sinais Claros</div>
+            <div class="farol-info" id="farol-indices-info">Monitorando oscilações</div>
+        </div>
+        <div class="farol-item farol-baixa" id="farol-dolar">
+            <div class="farol-asset">DOLAR</div>
+            <div class="farol-valor" id="farol-dolar-status">BAIXA</div>
+            <div class="farol-desc">Tendência de queda</div>
+            <div class="farol-info" id="farol-dolar-info">Fluxo estrangeiro positivo</div>
+        </div>
+        <div class="farol-item farol-amarelo" id="farol-sentimento">
+            <div class="farol-asset">SENTIMENTO</div>
+            <div class="farol-valor" id="farol-sentimento-status">AMARELO</div>
+            <div class="farol-desc">Sinal de atenção</div>
+            <div class="farol-info" id="farol-sentimento-info">Sinais mistos no mercado</div>
+        </div>
+    </div>
+</div>
 
     <h3>Acoes - Maiores Oscilacoes (Altas)</h3>
     <table>
@@ -793,5 +818,36 @@ footer {
   }
 
   document.addEventListener('DOMContentLoaded', carregarNoticias);
-  setInterval(carregarNoticias, 600000);
+  setInterval(function() { carregarNoticias(); atualizarFarol(); }, 180000);
+
+        
+// Atualizar Farol em tempo real
+function atualizarFarol() {
+    const farolStatus = document.getElementById('farol-indices-status');
+    const winj26 = document.getElementById('WINJ26'); 
+    const wdok26 = document.getElementById('WDOK26');
+    
+    if (!farolStatus || !winj26 || !wdok26) return;
+    
+    const winValue = parseFloat(winj26.textContent) || 0;
+    const wdoValue = parseFloat(wdok26.textContent) || 0;
+    
+    // Remove todas as classes de status
+    farolStatus.classList.remove('farol-alta', 'farol-baixa', 'farol-amarelo');
+    
+    // Determina cor baseado na comparação dos índices
+    if (winValue > 0 && wdoValue > 0) {
+        farolStatus.classList.add('farol-alta'); // Verde - Mercado em alta
+    } else if (winValue < 0 && wdoValue < 0) {
+        farolStatus.classList.add('farol-baixa'); // Vermelho - Mercado em baixa
+    } else {
+        farolStatus.classList.add('farol-amarelo'); // Amarelo - Neutro/Indeciso
+    }
+}
+
+// Chamar atualizarFarol ao carregar página
+document.addEventListener('DOMContentLoaded', function() {
+    carregarNoticias();
+    atualizarFarol();
+});
           </script>
