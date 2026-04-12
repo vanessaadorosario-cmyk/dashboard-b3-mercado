@@ -1355,7 +1355,7 @@ footer {
     try {
       const res = await fetch(RSS2JSON_URL);
       if (!res.ok) throw new Error('Falha na conexao');
-      const data = await res.json();
+                    const data = await res.json();
       const artigos = data.items || [];
       loading.remove();
       
