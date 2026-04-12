@@ -410,8 +410,8 @@ td {
     margin-bottom: 10px;
 }
 
-.reading-text {
-    color: #888;
+<script
+        color: #888;
     font-size: 0.85em;
     line-height: 1.6;
 }
@@ -728,3 +728,70 @@ footer {
     </footer>
 
     <script>
+          const API_URL = 'https://saurav.tech/NewsAPI/top-headlines/category/business/br.json';
+
+  function atualizarTimestamp() {
+    const agora = new Date();
+    const span = document.getElementById('noticias-update');
+    if (span) {
+      span.textContent = agora.toLocaleString('pt-BR').slice(0, 16);
+    }
+  }
+
+  async function carregarNoticias() {
+    const container = document.querySelector('.noticias-container');
+    if (!container) return;
+    atualizarTimestamp();
+    
+    // Remove noticias estaticas
+    container.querySelectorAll('.noticia-item, .loading-msg, .error-msg').forEach(el => el.remove());
+    
+    const loading = document.createElement('div');
+    loading.className = 'loading-msg';
+    loading.style.cssText = 'color:#888;font-style:italic;padding:20px;text-align:center';
+    loading.textContent = 'Carregando noticias em tempo real...';
+    container.appendChild(loading);
+
+    try {
+      const res = await fetch(API_URL);
+      if (!res.ok) throw new Error('Falha na conexao');
+      const data = await res.json();
+      const artigos = data.articles || [];
+      loading.remove();
+      
+      if (!artigos.length) {
+        const err = document.createElement('div');
+        err.className = 'error-msg';
+        err.style.cssText = 'color:#ff4444;padding:20px;text-align:center';
+        err.textContent = 'Nenhuma noticia disponivel.';
+        container.appendChild(err);
+        return;
+      }
+      
+      artigos.slice(0, 5).forEach(art => {
+        const item = document.createElement('div');
+        item.className = 'noticia-item';
+        const title = document.createElement('div');
+        title.className = 'noticia-titulo';
+        title.textContent = art.title || 'Sem titulo';
+        const source = document.createElement('div');
+        source.className = 'noticia-fonte';
+        source.textContent = (art.source?.name || 'Fonte') + ' | ' + new Date(art.publishedAt).toLocaleString('pt-BR').slice(0, 16);
+        item.appendChild(title);
+        item.appendChild(source);
+        container.appendChild(item);
+      });
+      atualizarTimestamp();
+    } catch (e) {
+      loading.remove();
+      const err = document.createElement('div');
+      err.className = 'error-msg';
+      err.style.cssText = 'color:#ff4444;padding:20px;text-align:center';
+      err.textContent = 'Erro ao carregar noticias.';
+      container.appendChild(err);
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', carregarNoticias);
+  setInterval(carregarNoticias, 600000);
+          </script>
