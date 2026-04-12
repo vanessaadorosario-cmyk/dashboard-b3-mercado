@@ -1328,7 +1328,7 @@ footer {
     </footer>
 
     <script>
-          const API_URL = 'https://saurav.tech/NewsAPI/top-headlines/category/business/br.json';
+          const RSS2JSON_URL = 'https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/dynamo/economia/rss2.xml';
 
   function atualizarTimestamp() {
     const agora = new Date();
@@ -1353,10 +1353,10 @@ footer {
     container.appendChild(loading);
 
     try {
-      const res = await fetch(API_URL);
+      const res = await fetch(RSS2JSON_URL);
       if (!res.ok) throw new Error('Falha na conexao');
       const data = await res.json();
-      const artigos = data.articles || [];
+      const artigos = data.items || [];
       loading.remove();
       
       if (!artigos.length) {
@@ -1376,7 +1376,7 @@ footer {
         title.textContent = art.title || 'Sem titulo';
         const source = document.createElement('div');
         source.className = 'noticia-fonte';
-        source.textContent = (art.source?.name || 'Fonte') + ' | ' + new Date(art.publishedAt).toLocaleString('pt-BR').slice(0, 16);
+        source.textContent = 'G1' + ' | ' + new Date(art.pubDate).toLocaleString('pt-BR').slice(0, 16);
         item.appendChild(title);
         item.appendChild(source);
         container.appendChild(item);
