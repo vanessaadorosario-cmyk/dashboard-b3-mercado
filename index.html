@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+Indicadores Globais<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boletim Diário do Mercado - B3</title>
@@ -1127,6 +1126,203 @@ footer {
     </div>
     <div class="previsao-fontes">Dados atualizados em tempo real | Fonte: Yahoo Finance</div>
 </div>
+    
+    <!-- Indicadores Globais em Tempo Real -->
+    <h3>Indicadores Globais em Tempo Real</h3>
+    <div class="ativos-container">
+        <div class="ativos-grid">
+            <!-- Moedas -->
+            <div class="ativos-coluna" style="border-top: 3px solid #00d4ff;">
+                <div class="ativos-titulo" style="background: rgba(0, 212, 255, 0.2);">Pares Cambiais</div>
+                <div class="ativos-descricao">Cotacoes em tempo real</div>
+                <table class="ativos-tabela" id="tabela-cambiais">
+                    <thead>
+                        <tr>
+                            <th>Par</th>
+                            <th>Preco</th>
+                            <th>Var.%</th>
+                            <th>Previo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ativo-ticker">USD/BRL</td>
+                            <td id="cambio-usdbrl-preco">--</td>
+                            <td id="cambio-usdbrl-var" style="color: #888;">--</td>
+                            <td id="cambio-usdbrl-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">EUR/USD</td>
+                            <td id="cambio-eurusd-preco">--</td>
+                            <td id="cambio-eurusd-var" style="color: #888;">--</td>
+                            <td id="cambio-eurusd-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">EUR/BRL</td>
+                            <td id="cambio-eurbrl-preco">--</td>
+                            <td id="cambio-eurbrl-var" style="color: #888;">--</td>
+                            <td id="cambio-eurbrl-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">GBP/USD</td>
+                            <td id="cambio-gbpusd-preco">--</td>
+                            <td id="cambio-gbpusd-var" style="color: #888;">--</td>
+                            <td id="cambio-gbpusd-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">USD/JPY</td>
+                            <td id="cambio-usdjpy-preco">--</td>
+                            <td id="cambio-usdjpy-var" style="color: #888;">--</td>
+                            <td id="cambio-usdjpy-previo">--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Indices Mundiais -->
+            <div class="ativos-coluna" style="border-top: 3px solid #00ff88;">
+                <div class="ativos-titulo" style="background: rgba(0, 255, 136, 0.2);">Indices Mundiais</div>
+                <div class="ativos-descricao">Bolsas internacionais</div>
+                <table class="ativos-tabela" id="tabela-indices">
+                    <thead>
+                        <tr>
+                            <th>Indice</th>
+                            <th>Preco</th>
+                            <th>Var.%</th>
+                            <th>Previo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ativo-ticker">S&P 500</td>
+                            <td id="indice-sp500-preco">--</td>
+                            <td id="indice-sp500-var" style="color: #888;">--</td>
+                            <td id="indice-sp500-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">Nasdaq 100</td>
+                            <td id="indice-nasdaq-preco">--</td>
+                            <td id="indice-nasdaq-var" style="color: #888;">--</td>
+                            <td id="indice-nasdaq-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">Dow Jones</td>
+                            <td id="indice-dow-preco">--</td>
+                            <td id="indice-dow-var" style="color: #888;">--</td>
+                            <td id="indice-dow-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">DAX (Alemanha)</td>
+                            <td id="indice-dax-preco">--</td>
+                            <td id="indice-dax-var" style="color: #888;">--</td>
+                            <td id="indice-dax-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">FTSE 100</td>
+                            <td id="indice-ftse-preco">--</td>
+                            <td id="indice-ftse-var" style="color: #888;">--</td>
+                            <td id="indice-ftse-previo">--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Commodities -->
+            <div class="ativos-coluna" style="border-top: 3px solid #ffaa00;">
+                <div class="ativos-titulo" style="background: rgba(255, 170, 0, 0.2);">Commodities</div>
+                <div class="ativos-descricao">Materias primas</div>
+                <table class="ativos-tabela" id="tabela-commodities">
+                    <thead>
+                        <tr>
+                            <th>Commodity</th>
+                            <th>Preco</th>
+                            <th>Var.%</th>
+                            <th>Previo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ativo-ticker">Ouro (oz)</td>
+                            <td id="comm-ouro-preco">--</td>
+                            <td id="comm-ouro-var" style="color: #888;">--</td>
+                            <td id="comm-ouro-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">Petroleo WTI</td>
+                            <td id="comm-petroleo-preco">--</td>
+                            <td id="comm-petroleo-var" style="color: #888;">--</td>
+                            <td id="comm-petroleo-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">Petroleo Brent</td>
+                            <td id="comm-brent-preco">--</td>
+                            <td id="comm-brent-var" style="color: #888;">--</td>
+                            <td id="comm-brent-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">Cobre</td>
+                            <td id="comm-cobre-preco">--</td>
+                            <td id="comm-cobre-var" style="color: #888;">--</td>
+                            <td id="comm-cobre-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">Soja</td>
+                            <td id="comm-soja-preco">--</td>
+                            <td id="comm-soja-var" style="color: #888;">--</td>
+                            <td id="comm-soja-previo">--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Cripto -->
+            <div class="ativos-coluna" style="border-top: 3px solid #ff6600;">
+                <div class="ativos-titulo" style="background: rgba(255, 102, 0, 0.2);">Criptomoedas</div>
+                <div class="ativos-descricao">Mercado cripto</div>
+                <table class="ativos-tabela" id="tabela-cripto">
+                    <thead>
+                        <tr>
+                            <th>Cripto</th>
+                            <th>Preco</th>
+                            <th>Var.%</th>
+                            <th>Previo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="ativo-ticker">Bitcoin</td>
+                            <td id="cripto-btc-preco">--</td>
+                            <td id="cripto-btc-var" style="color: #888;">--</td>
+                            <td id="cripto-btc-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">Ethereum</td>
+                            <td id="cripto-eth-preco">--</td>
+                            <td id="cripto-eth-var" style="color: #888;">--</td>
+                            <td id="cripto-eth-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">Solana</td>
+                            <td id="cripto-sol-preco">--</td>
+                            <td id="cripto-sol-var" style="color: #888;">--</td>
+                            <td id="cripto-sol-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">XRP</td>
+                            <td id="cripto-xrp-preco">--</td>
+                            <td id="cripto-xrp-var" style="color: #888;">--</td>
+                            <td id="cripto-xrp-previo">--</td>
+                        </tr>
+                        <tr>
+                            <td class="ativo-ticker">Cardano</td>
+                            <td id="cripto-ada-preco">--</td>
+                            <td id="cripto-ada-var" style="color: #888;">--</td>
+                            <td id="cripto-ada-previo">--</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="previsao-fontes" style="margin-top: 15px;">Dados atualizados em tempo real | Fonte: Yahoo Finance</div>
+    </div>
+
     <footer>
         <div>Fonte: B3 - Boletim Diario do Mercado | Boletim #68 | Publicado: 12/04/2026</div>
     </footer>
@@ -1445,7 +1641,135 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
         
-// Atualizar previsao do dolar a cada 5 minutos
+    // =========================
+    // INDICADORES GLOBAIS EM TEMPO REAL
+    // =========================
+    // Funcao para buscar dados de ativos globais via Yahoo Finance
+    async function buscarDadosIndicadores(tickers) {
+        const resultados = {};
+        const baseUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/';
+        
+        for (const [nome, ticker] of Object.entries(tickers)) {
+            try {
+                const url = baseUrl + ticker + '?interval=1d&range=2d';
+                const res = await fetch(url);
+                if (!res.ok) continue;
+                const data = await res.json();
+                const quote = data.chart?.result?.[0];
+                if (!quote) continue;
+                
+                const quotes = quote.indicators?.quote?.[0];
+                const closes = quotes?.close;
+                const opens = quotes?.open;
+                
+                if (closes && closes.length >= 2) {
+                    const currentPrice = closes[closes.length - 1];
+                    const prevPrice = closes[closes.length - 2];
+                    const previo = opens ? opens[opens.length - 2] : prevPrice;
+                    const change = ((currentPrice - prevPrice) / prevPrice) * 100;
+                    
+                    resultados[nome] = {
+                        preco: currentPrice,
+                        varPerc: change,
+                        previo: previo || prevPrice
+                    };
+                }
+            } catch (e) {
+                console.log('Erro ao buscar', nome, e);
+            }
+        }
+        return resultados;
+    }
+
+    // Funcao para atualizar todos os indicadores globais
+    async function atualizarIndicadoresGlobais() {
+        const tickers = {
+            // Pares Cambiais
+            'cambio-usdbrl': 'BRL=X',
+            'cambio-eurusd': 'EURUSD=X',
+            'cambio-eurbrl': 'EURBRL=X',
+            'cambio-gbpusd': 'GBPUSD=X',
+            'cambio-usdjpy': 'JPY=X',
+            // Indices Mundiais
+            'indice-sp500': 'SPY',
+            'indice-nasdaq': 'QQQ',
+            'indice-dow': 'DIA',
+            'indice-dax': 'EWG',
+            'indice-ftse': 'EWU',
+            // Commodities
+            'comm-ouro': 'GC=F',
+            'comm-petroleo': 'CL=F',
+            'comm-brent': 'BZ=F',
+            'comm-cobre': 'HG=F',
+            'comm-soja': 'ZS=F',
+            // Criptomoedas
+            'cripto-btc': 'BTC-USD',
+            'cripto-eth': 'ETH-USD',
+            'cripto-sol': 'SOL-USD',
+            'cripto-xrp': 'XRP-USD',
+            'cripto-ada': 'ADA-USD'
+        };
+
+        const dados = await buscarDadosIndicadores(tickers);
+
+        // Mapeamento de IDs para categorias e prefixos
+        const categorias = [
+            { prefix: 'cambio', dados: ['usdbrl', 'eurusd', 'eurbrl', 'gbpusd', 'usdjpy'] },
+            { prefix: 'indice', dados: ['sp500', 'nasdaq', 'dow', 'dax', 'ftse'] },
+            { prefix: 'comm', dados: ['ouro', 'petroleo', 'brent', 'cobre', 'soja'] },
+            { prefix: 'cripto', dados: ['btc', 'eth', 'sol', 'xrp', 'ada'] }
+        ];
+
+        categorias.forEach(cat => {
+            cat.dados.forEach(item => {
+                const key = cat.prefix + '-' + item;
+                const d = dados[key];
+                if (d) {
+                    const precoEl = document.getElementById(cat.prefix + '-' + item + '-preco');
+                    const varEl = document.getElementById(cat.prefix + '-' + item + '-var');
+                    const previoEl = document.getElementById(cat.prefix + '-' + item + '-previo');
+
+                    if (precoEl) {
+                        // Formata preco conforme categoria
+                        if (cat.prefix === 'cripto') {
+                            precoEl.textContent = '$' + d.preco.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                        } else if (cat.prefix === 'indice') {
+                            precoEl.textContent = d.preco.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                        } else if (cat.prefix === 'comm') {
+                            const sym = item === 'ouro' ? '$' : item === 'petroleo' || item === 'brent' ? '$' : item === 'cobre' ? '$' : '$';
+                            precoEl.textContent = sym + d.preco.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                        } else {
+                            precoEl.textContent = d.preco.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+                        }
+                    }
+                    if (varEl) {
+                        const val = d.varPerc.toFixed(2);
+                        varEl.textContent = (d.varPerc >= 0 ? '+' : '') + val + '%';
+                        varEl.style.color = d.varPerc >= 0 ? '#00ff88' : '#ff4444';
+                    }
+                    if (previoEl) {
+                        if (cat.prefix === 'cripto') {
+                            previoEl.textContent = '$' + d.previo.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                        } else if (cat.prefix === 'indice') {
+                            previoEl.textContent = d.previo.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                        } else if (cat.prefix === 'comm') {
+                            previoEl.textContent = '$' + d.previo.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                        } else {
+                            previoEl.textContent = d.previo.toLocaleString('en-US', { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+                        }
+                    }
+                }
+            });
+        });
+    }
+    // Chamar na carga da pagina
+    atualizarIndicadoresGlobais();
+
+    // Atualizar a cada 5 minutos
+    setInterval(atualizarIndicadoresGlobais, 300000);
+
+        
+        // Atualizar indicadores globais a cada 5 minutos
 setInterval(function() {
     atualizarTabelaAtivos();
     atualizarPrevisaoDolar();
