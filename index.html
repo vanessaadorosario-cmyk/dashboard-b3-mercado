@@ -88,7 +88,66 @@
 
     <!-- FAROL DE MERCADO -->
     <div class="farol-container">
-        <h3>Farol de Mercado</h3>
+        
+        
+    <!-- FLUXO ESTRANGEIRO -->
+    <div class="section">
+        <h3>Fluxo Estrangeiro na B3</h3>
+        <div class="fluxo-grid">
+            <div class="fluxo-card">
+                <div class="fluxo-titulo">Fluxo Mensal (Abril/2026)</div>
+                <div class="fluxo-valor" id="fluxo-mensal-estrangeiro">R$ 11.042 mi</div>
+                <div class="fluxo-subtitulo">Estrangeiro</div>
+            </div>
+            <div class="fluxo-card">
+                <div class="fluxo-titulo">Institucional</div>
+                <div class="fluxo-valor down" id="fluxo-mensal-inst">R$ -12.458 mi</div>
+                <div class="fluxo-subtitulo">Saída líquida</div>
+            </div>
+            <div class="fluxo-card">
+                <div class="fluxo-titulo">Pessoa Física</div>
+                <div class="fluxo-valor down" id="fluxo-mensal-pf">R$ -2.254 mi</div>
+                <div class="fluxo-subtitulo">Saída líquida</div>
+            </div>
+            
+                
+            
+        .fluxo-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+        .fluxo-card { background: #0f0f1a; border-radius: 8px; padding: 15px; border-left: 4px solid #333; text-align: center; }
+        .fluxo-card.up { border-left-color: #00ff88; }
+        .fluxo-card.down { border-left-color: #ff4444; }
+        .fluxo-titulo { color: #888; font-size: 0.85em; margin-bottom: 5px; }
+        .fluxo-valor { font-size: 1.4em; font-weight: bold; margin-bottom: 5px; }
+        .fluxo-valor.up { color: #00ff88; }
+        .fluxo-valor.down { color: #ff4444; }
+        .fluxo-subtitulo { color: #666; font-size: 0.8em; }
+                @media (max-width: 768px) { .fluxo-grid { grid-template-columns: repeat(2, 1fr); } }
+    </style>
+</head>
+        <div class="fluxo-grid">
+            <div class="fluxo-card">
+                <div class="fluxo-titulo">Outros</div>
+                <div class="fluxo-valor" id="fluxo-mensal-outros">R$ 434 mi</div>
+                <div class="fluxo-subtitulo">Entrada líquida</div>
+            </div>
+            <div class="fluxo-card">
+                <div class="fluxo-titulo">Total do Mês</div>
+                <div class="fluxo-valor down" id="fluxo-mensal-total">R$ -896 mi</div>
+                <div class="fluxo-subtitulo">Saldo líquido</div>
+            </div>
+            <div class="fluxo-card">
+                <div class="fluxo-titulo">Fluxo Diário (Último dia)</div>
+                <div class="fluxo-valor down" id="fluxo-diario-estrangeiro">R$ -459,99 mi</div>
+                <div class="fluxo-subtitulo">Estrangeiro</div>
+            </div>
+            <div class="fluxo-card">
+                <div class="fluxo-titulo">Última Atualização</div>
+                <div class="fluxo-valor" id="fluxo-data">24/04/2026</div>
+                <div class="fluxo-subtitulo">Fonte: Dados de Mercado / B3</div>
+            </div>
+        </div>
+        <p style="color:#666;font-size:0.8em;margin-top:10px;">* Dados atualizados diariamente pela B3. Valores em milhões de reais (R$).</p>
+    </div><h3>Farol de Mercado</h3>
         <div class="farol-grid">
             <div class="farol-item amarelo">
                 <div class="farol-title">INDICES</div>
