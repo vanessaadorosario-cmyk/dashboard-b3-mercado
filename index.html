@@ -3,425 +3,495 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boletim Diário do Mercado - B3</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Boletim Diario do Mercado - B3</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0f0f1a;
-            color: #e0e0e0;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: #00d4ff;
-            font-size: 2.5em;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .header .subtitle {
-            color: #888;
-            font-size: 1.1em;
-        }
-
-        .header .update-time {
-            color: #666;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .card {
-            background: #1a1a2e;
-            border-radius: 10px;
-            padding: 20px;
-            border-left: 4px solid #333;
-        }
-
-        .card.up {
-            border-left-color: #00ff88;
-        }
-
-        .card.down {
-            border-left-color: #ff4444;
-        }
-
-        .card-title {
-            color: #888;
-            font-size: 0.85em;
-            margin-bottom: 8px;
-        }
-
-        .card-value {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .card-variation {
-            font-size: 1em;
-        }
-
-        .card.up .card-variation {
-            color: #00ff88;
-        }
-
-        .card.down .card-variation {
-            color: #ff4444;
-        }
-
-        h3 {
-            color: #00d4ff;
-            font-size: 1.2em;
-            margin: 25px 0 15px 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #333;
-        }
-
-        th {
-            color: #00d4ff;
-            font-size: 0.9em;
-            text-transform: uppercase;
-        }
-
-        td {
-            color: #ccc;
-        }
-
-        .farol-container {
-            background: #1a1a2e;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-        }
-
-        .farol-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .farol-item {
-            background: #0f0f1a;
-            border-radius: 8px;
-            padding: 15px;
-            border-left: 4px solid #333;
-        }
-
-        .farol-item.alta {
-            border-left-color: #00ff88;
-        }
-
-        .farol-item.baixa {
-            border-left-color: #ff4444;
-        }
-
-        .farol-item.amarelo {
-            border-left-color: #ffaa00;
-        }
-
-        .farol-title {
-            color: #888;
-            font-size: 0.85em;
-            margin-bottom: 5px;
-        }
-
-        .farol-valor {
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .farol-item.alta .farol-valor {
-            color: #00ff88;
-        }
-
-        .farol-item.baixa .farol-valor {
-            color: #ff4444;
-        }
-
-        .farol-item.amarelo .farol-valor {
-            color: #ffaa00;
-        }
-
-        .noticias-container {
-            background: #1a1a2e;
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-
-        .noticia-item {
-            padding: 15px;
-            border-bottom: 1px solid #333;
-        }
-
-        .noticia-item:last-child {
-            border-bottom: none;
-        }
-
-        .noticia-titulo {
-            color: #00d4ff;
-            font-size: 1em;
-            margin-bottom: 8px;
-        }
-
-        .noticia-fonte {
-            color: #666;
-            font-size: 0.8em;
-        }
-
-        .loading {
-            color: #888;
-            font-style: italic;
-        }
-
-        footer {
-            text-align: center;
-            color: #666;
-            font-size: 0.8em;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-        }
-
-        @media (max-width: 768px) {
-            .cards-container {
-                grid-template-columns: 1fr;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0f1a; color: #e0e0e0; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #00d4ff; font-size: 2.5em; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 2px; }
+        .header .subtitle { color: #888; font-size: 1.1em; }
+        .header .update-time { color: #666; font-size: 0.9em; margin-top: 5px; }
+        .cards-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .card { background: #1a1a2e; border-radius: 10px; padding: 20px; border-left: 4px solid #333; }
+        .card.up { border-left-color: #00ff88; }
+        .card.down { border-left-color: #ff4444; }
+        .card-title { color: #888; font-size: 0.85em; margin-bottom: 8px; }
+        .card-value { font-size: 1.8em; font-weight: bold; margin-bottom: 8px; }
+        .card-variation { font-size: 1em; }
+        .card.up .card-variation { color: #00ff88; }
+        .card.down .card-variation { color: #ff4444; }
+        h3 { color: #00d4ff; font-size: 1.2em; margin: 25px 0 15px 0; text-transform: uppercase; letter-spacing: 1px; }
+        h4 { color: #aaa; font-size: 1em; margin: 15px 0 10px 0; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #333; }
+        th { color: #00d4ff; font-size: 0.9em; text-transform: uppercase; }
+        td { color: #ccc; }
+        .farol-container { background: #1a1a2e; border-radius: 10px; padding: 25px; margin-bottom: 25px; }
+        .farol-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+        .farol-item { background: #0f0f1a; border-radius: 8px; padding: 15px; border-left: 4px solid #333; }
+        .farol-item.alta { border-left-color: #00ff88; }
+        .farol-item.baixa { border-left-color: #ff4444; }
+        .farol-item.amarelo { border-left-color: #ffaa00; }
+        .farol-title { color: #888; font-size: 0.85em; margin-bottom: 5px; }
+        .farol-valor { font-size: 1.3em; font-weight: bold; margin-bottom: 8px; }
+        .farol-item.alta .farol-valor { color: #00ff88; }
+        .farol-item.baixa .farol-valor { color: #ff4444; }
+        .farol-item.amarelo .farol-valor { color: #ffaa00; }
+        .noticias-container { background: #1a1a2e; border-radius: 10px; padding: 20px; margin-bottom: 25px; }
+        .noticia-item { padding: 15px; border-bottom: 1px solid #333; }
+        .noticia-item:last-child { border-bottom: none; }
+        .noticia-titulo { color: #00d4ff; font-size: 1em; margin-bottom: 8px; }
+        .noticia-fonte { color: #666; font-size: 0.8em; }
+        .loading { color: #888; font-style: italic; }
+        .section { background: #1a1a2e; border-radius: 10px; padding: 20px; margin-bottom: 25px; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; }
+        .mini-card { background: #0f0f1a; border-radius: 8px; padding: 15px; }
+        .mini-title { color: #888; font-size: 0.8em; margin-bottom: 5px; }
+        .mini-value { font-size: 1.4em; font-weight: bold; margin-bottom: 5px; }
+        .mini-var { font-size: 0.9em; }
+        .up { color: #00ff88; }
+        .down { color: #ff4444; }
+        .neutral { color: #ffaa00; }
+        footer { text-align: center; color: #666; font-size: 0.8em; margin-top: 30px; padding-top: 20px; border-top: 1px solid #333; }
+        @media (max-width: 768px) { .cards-container, .farol-grid, .grid-2 { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>📊 Boletim Diário do Mercado - B3</h1>
-        <div class="subtitle">Atualizado em: <span id="noticias-update">24/04/2026 16:00</span></div>
-    </div>
+        <h1>Boletim Diario do Mercado - B3</h1>
+        <div class="subtitle">Atualizado em: <span id="update-time">Carregando...</span></div>
+    </d
 
+    <!-- CARDS PRINCIPAIS -->
     <div class="cards-container">
-        <div class="card up">
+        <div class="card down" id="card-IBOV">
             <div class="card-title">IBOVESPA</div>
-            <div class="card-value" id="IBOV">190.550,56</div>
-            <div class="card-variation">-1,21% (-2.337 pts)</div>
+            <div class="card-value" id="IBOV-preco">190.400,89</div>
+            <div class="card-variation" id="IBOV-var">-0,26% (-488 pts)</div>
         </div>
-
-        <div class="card up">
-            <div class="card-title">MINI ÍNDICE (WINJ26)</div>
-            <div class="card-value" id="WINJ26">190.375</div>
-            <div class="card-variation">-1,23%</div>
+        <div class="card down" id="card-WINJ26">
+            <div class="card-title">MINI INDICE (WINJ26)</div>
+            <div class="card-value" id="WINJ26-preco">190.375</div>
+            <div class="card-variation" id="WINJ26-var">-1,23%</div>
         </div>
-
-        <div class="card down">
-            <div class="card-title">MINI DÓLAR (WDOK26)</div>
-            <div class="card-value" id="WDOK26">4.9965</div>
-            <div class="card-variation">+0,38%</div>
+        <div class="card up" id="card-WDOK26">
+            <div class="card-title">MINI DOLAR (WDOK26)</div>
+            <div class="card-value" id="WDOK26-preco">5.0145</div>
+            <div class="card-variation" id="WDOK26-var">-0,32%</div>
         </div>
-
-        <div class="card up">
-            <div class="card-title">DÓLAR A VISTA</div>
-            <div class="card-value">R$ 4,9965</div>
-            <div class="card-variation">+0,38% (mínimo 2 anos)</div>
+        <div class="card up" id="card-USD_BRL">
+            <div class="card-title">DOLAR A VISTA</div>
+            <div class="card-value" id="USD_BRL-preco">R$ 5,0175</div>
+            <div class="card-variation" id="USD_BRL-var">-0,32% (minimo 2 anos)</div>
         </div>
-    </div>
+    </d
 
+    <!-- FAROL DE MERCADO -->
     <div class="farol-container">
-        <h3>🚦 Farol de Mercado</h3>
+        <h3>Farol de Mercado</h3>
         <div class="farol-grid">
             <div class="farol-item amarelo">
-                <div class="farol-title">ÍNDICES</div>
+                <div class="farol-title">INDICES</div>
                 <div class="farol-valor">AMARELO</div>
                 <div class="farol-title">Aguardando Sinais Claros</div>
             </div>
-
             <div class="farol-item baixa">
-                <div class="farol-title">DÓLAR</div>
+                <div class="farol-title">DOLAR</div>
                 <div class="farol-valor">BAIXA</div>
-                <div class="farol-title">Tendência de queda</div>
+                <div class="farol-title">Tendencia de queda</div>
             </div>
-
             <div class="farol-item amarelo">
                 <div class="farol-title">SENTIMENTO</div>
                 <div class="farol-valor">AMARELO</div>
-                <div class="farol-title">Sinal de atenção</div>
+                <div class="farol-title">Sinal de atencao</div>
             </div>
         </div>
-    </div>
+    </d
 
+    <!-- NOTICIAS EM TEMPO REAL -->
     <div class="noticias-container">
-        <h3>📰 Notícias em Tempo Real</h3>
+        <h3>Noticias em Tempo Real</h3>
         <div class="noticia-item">
-            <div class="noticia-titulo">Ibovespa fecha com queda na sessão, dólar fecha em alta</div>
-            <div class="noticia-fonte">G1 Economia | 24/04/2026 16:00</div>
+            <div class="noticia-titulo">Ibovespa fecha com leve queda na sessao, dolar em baixa</div>
+            <div class="noticia-fonte">G1 Economia | <span class="data-hoje">24/04/2026</span> 16:00</div>
         </div>
         <div class="noticia-item">
-            <div class="noticia-titulo">Banco Central mantém Selic em 13,75% ao ano</div>
-            <div class="noticia-fonte">CNN Brasil Money | 24/04/2026 14:30</div>
+            <div class="noticia-titulo">Banco Central mantem Selic em 13,75% ao ano</div>
+            <div class="noticia-fonte">CNN Brasil Money | <span class="data-hoje">24/04/2026</span> 14:30</div>
         </div>
         <div class="noticia-item">
-            <div class="noticia-titulo">Fluxo estrangeiro negativo na B3 pressionó dólar</div>
-            <div class="noticia-fonte">Infomoney | 24/04/2026 12:15</div>
+            <div class="noticia-titulo">S&P 500 bate novo recorde historico acima de 7.100 pontos</div>
+            <div class="noticia-fonte">Bloomberg | <span class="data-hoje">24/04/2026</span> 13:00</div>
         </div>
         <div class="noticia-item">
-            <div class="noticia-titulo">Petrobras fecha em alta com aumento do petróleo</div>
-            <div class="noticia-fonte">G1 Economia | 24/04/2026 11:45</div>
+            <div class="noticia-titulo">Petrobras fecha em alta com alta do petroleo Brent</div>
+            <div class="noticia-fonte">Infomoney | <span class="data-hoje">24/04/2026</span> 12:15</div>
         </div>
         <div class="noticia-item">
-            <div class="noticia-titulo">S&P 500 fecha perto de recorde com dados de inflação</div>
-            <div class="noticia-fonte">Bloomberg | 24/04/2026 10:20</div>
+            <div class="noticia-titulo">Bitcoin opera em queda perto de US$ 77.000</div>
+            <div class="noticia-fonte">CoinTelegraph | <span class="data-hoje">24/04/2026</span> 11:00</div>
         </div>
-    </div>
+    </d
 
-    <div class="farol-container">
-        <h3>📈 Indicadores Globais em Tempo Real</h3>
+    <!-- INDICADORES GLOBAIS -->
+    <div class="section">
+        <h3>Indicadores Globais em Tempo Real</h3>
         <table>
-            <thead>
-                <tr>
-                    <th>Índice</th>
-                    <th>Preço</th>
-                    <th>Variação %</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Indice</th><th>Preco</th><th>Variação %</th></tr></thead>
             <tbody>
-                <tr>
-                    <td>S&P 500</td>
-                    <td>7.125,43</td>
-                    <td style="color: #00ff88;">+0,85%</td>
-                </tr>
-                <tr>
-                    <td>Nasdaq 100</td>
-                    <td>24.687,19</td>
-                    <td style="color: #00ff88;">+1,12%</td>
-                </tr>
-                <tr>
-                    <td>Dow Jones</td>
-                    <td>49.512,87</td>
-                    <td style="color: #00ff88;">+0,45%</td>
-                </tr>
-                <tr>
-                    <td>Bitcoin</td>
-                    <td>$77.747,82</td>
-                    <td style="color: #00ff88;">+2,31%</td>
-                </tr>
-                <tr>
-                    <td>Ethereum</td>
-                    <td>$2.326,03</td>
-                    <td style="color: #00ff88;">+1,87%</td>
-                </tr>
+                <tr><td>S&P 500</td><td id="SP500-preco">7.161,53</td><td id="SP500-var" class="up">+0,75%</td></tr>
+                <tr><td>Nasdaq 100</td><td id="NDX-preco">27.285,38</td><td id="NDX-var" class="up">+0,45%</td></tr>
+                <tr><td>Dow Jones</td><td id="DJI-preco">49.178,43</td><td id="DJI-var" class="up">+0,28%</td></tr>
+            </tbody>
+        </table>
+
+        <h4>Criptomoedas</h4>
+        <table>
+            <thead><tr><th>Cripto</th><th>Preco USD</th><th>Preco BRL</th><th>Variação %</th></tr></thead>
+            <tbody>
+                <tr><td>Bitcoin</td><td id="BTC-usd">$ 77.652,30</td><td id="BTC-brl">R$ 387.864</td><td id="BTC-var" class="down">-0,42%</td></tr>
+                <tr><td>Ethereum</td><td id="ETH-usd">$ 2.323,16</td><td id="ETH-brl">R$ 11.601</td><td id="ETH-var" class="up">+0,19%</td></tr>
             </tbody>
         </table>
 
         <h4>Commodities</h4>
         <table>
-            <thead>
-                <tr>
-                    <th>Commodity</th>
-                    <th>Preço</th>
-                    <th>Variação %</th>
-                </tr>
-            </thead>
+            <thead><tr><th>Commodity</th><th>Preco</th><th>Variação %</th></tr></thead>
             <tbody>
-                <tr>
-                    <td>Ouro (oz)</td>
-                    <td>$4.697,45</td>
-                    <td style="color: #ff4444;">-0,89%</td>
-                </tr>
-                <tr>
-                    <td>Petróleo WTI</td>
-                    <td>$103,24</td>
-                    <td style="color: #00ff88;">+1,23%</td>
-                </tr>
-                <tr>
-                    <td>Petróleo Brent</td>
-                    <td>$106,10</td>
-                    <td style="color: #ffaa00;">+0,94%</td>
-                </tr>
+                <tr><td>Ouro (oz)</td><td id="GOLD-preco">$ 4.733,70</td><td id="GOLD-var" class="up">+0,52%</td></tr>
+                <tr><td>Petroleo WTI</td><td id="WTI-preco">$ 94,78</td><td id="WTI-var" class="down">-0,14%</td></tr>
+                <tr><td>Petroleo Brent</td><td id="BRENT-preco">$ 99,72</td><td id="BRENT-var" class="down">-0,31%</td></tr>
             </tbody>
         </table>
+    </d
+
+    <!-- PARES CAMBIAIS -->
+    <div class="section">
+        <h3>Pares Cambiais</h3>
+        <table>
+            <thead><tr><th>Par</th><th>Bid</th><th>Ask</th><th>Max</th><th>Min</th><th>Variação %</th></tr></thead>
+            <tbody>
+                <tr><td>USD/BRL</td><td id="USD_BRL-bid">5,0145</td><td id="USD_BRL-ask">5,0175</td><td id="USD_BRL-max">5,063</td><td id="USD_BRL-min">4,9899</td><td id="USD_BRL-pct">-0,32%</td></tr>
+                <tr><td>EUR/BRL</td><td id="EUR_BRL-bid">5,8719</td><td id="EUR_BRL-ask">5,8858</td><td id="EUR_BRL-max">5,9276</td><td id="EUR_BRL-min">5,8445</td><td id="EUR_BRL-pct">-0,06%</td></tr>
+                <tr><td>EUR/USD</td><td id="EUR_USD-bid">1,1718</td><td id="EUR_USD-ask">1,1719</td><td id="EUR_USD-max">1,1721</td><td id="EUR_USD-min">1,1672</td><td id="EUR_USD-pct" class="up">+0,31%</td></tr>
+                <tr><td>GBP/BRL</td><td id="GBP_BRL-bid">6,7852</td><td id="GBP_BRL-ask">6,7893</td><td id="GBP_BRL-max">6,8353</td><td id="GBP_BRL-min">6,7340</td><td id="GBP_BRL-pct" class="up">+0,29%</td></tr>
+                <tr><td>JPY/BRL</td><td id="JPY_BRL-bid">0,0314</td><td id="JPY_BRL-ask">0,0314</td><td id="JPY_BRL-max">0,0317</td><td id="JPY_BRL-min">0,0313</td><td id="JPY_BRL-pct" class="down">-0,09%</td></tr>
+            </tbody>
+        </table>
+    </div>iv>iv>iv>iv>iv>
+
+    <!-- ATIVOS DA CARTEIRA - Investing.com -->
+    <div class="section">
+        <h3>Ativos da Carteira - Investing.com</h3>
+        <table>
+            <thead><tr><th>Ativo</th><th>Preco</th><th>Variação %</th><th>Status</th></tr></thead>
+            <tbody>
+                <tr><td>PETR4</td><td id="PETR4-preco">R$ 46,94</td><td id="PETR4-var" class="up">+0,88%</td><td>Alta</td></tr>
+                <tr><td>VALE3</td><td id="VALE3-preco">R$ 85,92</td><td id="VALE3-var" class="down">-0,36%</td><td>Leve Queda</td></tr>
+                <tr><td>ITUB4</td><td id="ITUB4-preco">R$ 44,33</td><td id="ITUB4-var" class="up">+0,50%</td><td>Alta</td></tr>
+                <tr><td>BBDC4</td><td id="BBDC4-preco">R$ 19,92</td><td id="BBDC4-var" class="down">-0,70%</td><td>Queda</td></tr>
+                <tr><td>WEGE3</td><td id="WEGE3-preco">R$ 47,50</td><td id="WEGE3-var" class="up">+0,12%</td><td>Estavel</td></tr>
+                <tr><td>SUZB3</td><td id="SUZB3-preco">R$ 45,49</td><td id="SUZB3-var" class="down">-0,40%</td><td>Leve Queda</td></tr>
+                <tr><td>CPFE3</td><td id="CPFE3-preco">R$ 53,39</td><td id="CPFE3-var" class="down">-0,31%</td><td>Leve Queda</td></tr>
+                <tr><td>FLRY3</td><td id="FLRY3-preco">R$ 16,15</td><td id="FLRY3-var" class="down">-0,35%</td><td>Leve Queda</td></tr>
+                <tr><td>VIVT3</td><td id="VIVT3-preco">R$ 40,16</td><td id="VIVT3-var" class="up">+0,70%</td><td>Alta</td></tr>
+                <tr><td>TOTS3</td><td id="TOTS3-preco">R$ 32,26</td><td id="TOTS3-var" class="down">-1,66%</td><td>Queda</td></tr>
+            </tbody>
+        </table>
+    </d
+
+    <!-- ACOES B3 - MAIORES OSCILACOES -->
+    <div class="section">
+        <h3>Acoes B3 - Maiores Oscilacoes</h3>
+        <div class="grid-2">
+            <div>
+                <h4>Maiores Altas</h4>
+                <table>
+                    <thead><tr><th>Ativo</th><th>Preco</th><th>Variação</th></tr></thead>
+                    <tbody>
+                        <tr><td>PETR4</td><td id="altas-PETR4">R$ 46,94</td><td class="up">+0,88%</td></tr>
+                        <tr><td>ITUB4</td><td id="altas-ITUB4">R$ 44,33</td><td class="up">+0,50%</td></tr>
+                        <tr><td>VIVT3</td><td id="altas-VIVT3">R$ 40,16</td><td class="up">+0,70%</td></tr>
+                        <tr><td>AMER3</td><td id="altas-AMER3">R$ 5,99</td><td class="up">-0,33%</td></tr>
+                        <tr><td>CMIG4</td><td id="altas-CMIG4">R$ 13,00</td><td class="up">-0,15%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h4>Maiores Baixas</h4>
+                <table>
+                    <thead><tr><th>Ativo</th><th>Preco</th><th>Variação</th></tr></thead>
+                    <tbody>
+                        <tr><td>TOTS3</td><td id="baixas-TOTS3">R$ 32,26</td><td class="down">-1,66%</td></tr>
+                        <tr><td>BBDC4</td><td id="baixas-BBDC4">R$ 19,92</td><td class="down">-0,70%</td></tr>
+                        <tr><td>COGN3</td><td id="baixas-COGN3">R$ 2,95</td><td class="down">-0,34%</td></tr>
+                        <tr><td>VALE3</td><td id="baixas-VALE3">R$ 85,92</td><td class="down">-0,36%</td></tr>
+                        <tr><td>LREN3</td><td id="baixas-LREN3">R$ 14,21</td><td class="down">-0,28%</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </d
+
+    <!-- ATIVOS DE RISCO E SEGURANCA - Previsao Dolar -->
+    <div class="section">
+        <h3>Ativos de Risco e Seguranca - Previsao Dolar</h3>
+        <table>
+            <thead><tr><th>Ativo</th><th>Preco</th><th>Tipo</th><th>Variação %</th></tr></thead>
+            <tbody>
+                <tr><td>Dolar (USD/BRL)</td><td id="previsao-USD">R$ 5,0175</td><td>Risco</td><td id="previsao-USD-var" class="down">-0,32%</td></tr>
+                <tr><td>Ouro (XAU/USD)</td><td id="previsao-XAU">$ 4.733,70</td><td>Seguranca</td><td id="previsao-XAU-var" class="up">+0,52%</td></tr>
+                <tr><td>Bitcoin</td><td id="previsao-BTC">$ 77.652,30</td><td>Risco</td><td id="previsao-BTC-var" class="down">-0,42%</td></tr>
+                <tr><td>Ethereum</td><td id="previsao-ETH">$ 2.323,16</td><td>Risco</td><td id="previsao-ETH-var" class="up">+0,19%</td></tr>
+                <tr><td>Yen (JPY/USD)</td><td id="previsao-JPY">154,85</td><td>Seguranca</td><td id="previsao-JPY-var" class="down">-0,18%</td></tr>
+            </tbody>
+        </table>
+        <p style="color:#666;font-size:0.8em;margin-top:10px;">* Dados de previsao baseados em analises de mercado. Consulte sempre um profissional.</p>
     </div>
 
     <footer>
-        <p>Fonte: B3 - Boletim Diário do Mercado | Yahoo Finance | Investing.com<br>
-        Última atualização: 24/04/2026 às 16:00 BRT</p>
-    </footer>
+        <p>Fonte: B3 | Yahoo Finance | Investing.com | AwesomeAPI<br>
+        Boletim Diario do Mercado | Atualizacao automatica a cada 60 segundos</p>
+    </f
 
     <script>
         // Atualizar timestamp
         function atualizarTimestamp() {
             const agora = new Date();
-            const span = document.getElementById('noticias-update');
-            if (span) {
-                span.textContent = agora.toLocaleString('pt-BR').slice(0, 16);
+            const data = agora.toLocaleDateString('pt-BR');
+            const hora = agora.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
+            const span = document.getElementById('update-time');
+            if (span) span.textContent = data + ' ' + hora;
+            // Atualizar spans de data
+            document.querySelectorAll('.data-hoje').forEach(s => s.textContent = data);
+        }
+
+        // Funcao generica para atualizar preco e variacao
+        function atualizarCard(prefix, preco, variacao, isUp) {
+            const elPreco = document.getElementById(prefix + '-preco');
+            const elVar = document.getElementById(prefix + '-var');
+            const elCard = document.getElementById('card-' + prefix);
+            if (elPreco) elPreco.textContent = preco;
+            if (elVar) elVar.textContent = variacao;
+            if (elCard) {
+                elCard.classList.remove('up', 'down');
+                elCard.classList.add(isUp ? 'up' : 'down');
             }
         }
 
-        // Buscar dados de ativos via Yahoo Finance
-        async function buscarDados(ticker) {
-            const url = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=2d`;
+        // Buscar dados do Yahoo Finance
+        async function buscarYahoo(symbol, prefix) {
             try {
+                const url = 'https://query1.finance.yahoo.com/v8/finance/chart/' + symbol + '?interval=1d&range=2d';
                 const res = await fetch(url);
                 if (!res.ok) return null;
                 const data = await res.json();
-                const quote = data.chart?.result?.[0];
-                if (!quote) return null;
-
-                const quotes = quote.indicators?.quote?.[0];
-                const closes = quotes?.close;
-
+                const q = data.chart?.result?.[0];
+                if (!q) return null;
+                const closes = q.indicators?.quote?.[0]?.close;
                 if (!closes || closes.length < 2) return null;
+                const curr = closes[closes.length - 1];
+                const prev = closes[closes.length - 2];
+                const change = ((curr - prev) / prev) * 100;
+                return { price: curr, change: change };
+            } catch (e) { return null; }
+        }
 
-                const currentPrice = closes[closes.length - 1];
-                const prevPrice = closes[closes.length - 2];
-                const change = ((currentPrice - prevPrice) / prevPrice) * 100;
+        // Buscar dados do AwesomeAPI (cambio)
+        async function buscarAwesomeAPI() {
+            try {
+                const url = 'https://economia.awesomeapi.com.br/json/last/USD-BRL,EUR-BRL,EUR-USD,GBP-BRL,JPY-BRL,BTC-BRL,ETH-BRL';
+                const res = await fetch(url);
+                if (!res.ok) return null;
+                return await res.json();
+            } catch (e) { return null; }
+        }
 
-                return { price: currentPrice, change: change };
-            } catch (e) {
-                return null;
+        // Atualizar todos os dados
+        async function atualizarDados() {
+            atualizarTimestamp();
+
+            // Atualizar IBOV via Yahoo
+            const ibov = await buscarYahoo('%5EBVSP', 'IBOV');
+            if (ibov) {
+                const p = ibov.price.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+                const c = ibov.change.toFixed(2);
+                atualizarCard('IBOV', p, (ibov.change >= 0 ? '+' : '') + c + '% (-' + Math.abs(Math.round((ibov.price * c/100))) + ' pts)', ibov.change >= 0);
+            }
+
+            // Atualizar dolar via AwesomeAPI
+            const fx = await buscarAwesomeAPI();
+            if (fx) {
+                const usd = fx.USDBRL;
+                document.getElementById('USD_BRL-bid').textContent = usd.bid;
+                document.getElementById('USD_BRL-ask').textContent = usd.ask;
+                document.getElementById('USD_BRL-max').textContent = usd.high;
+                document.getElementById('USD_BRL-min').textContent = usd.low;
+                document.getElementById('USD_BRL-pct').textContent = usd.pctChange + '%';
+                const pct = parseFloat(usd.pctChange);
+                document.getElementById('USD_BRL-pct').className = pct >= 0 ? 'up' : 'down';
+                document.getElementById('USD_BRL-preco').textContent = 'R$ ' + usd.ask;
+                document.getElementById('USD_BRL-var').textContent = usd.pctChange + '% (minimo 2 anos)';
+                document.getElementById('card-USD_BRL').classList.remove('up','down');
+                document.getElementById('card-USD_BRL').classList.add(pct >= 0 ? 'up' : 'down');
+
+                const eur = fx.EURBRL;
+                document.getElementById('EUR_BRL-bid').textContent = eur.bid;
+                document.getElementById('EUR_BRL-ask').textContent = eur.ask;
+                document.getElementById('EUR_BRL-max').textContent = eur.high;
+                document.getElementById('EUR_BRL-min').textContent = eur.low;
+                document.getElementById('EUR_BRL-pct').textContent = eur.pctChange + '%';
+                const eurpct = parseFloat(eur.pctChange);
+                document.getElementById('EUR_BRL-pct').className = eurpct >= 0 ? 'up' : 'down';
+
+                const eurusd = fx.EURUSD;
+                document.getElementById('EUR_USD-bid').textContent = eurusd.bid;
+                document.getElementById('EUR_USD-ask').textContent = eurusd.ask;
+                document.getElementById('EUR_USD-max').textContent = eurusd.high;
+                document.getElementById('EUR_USD-min').textContent = eurusd.low;
+                document.getElementById('EUR_USD-pct').textContent = eurusd.pctChange + '%';
+                const eurusdpct = parseFloat(eurusd.pctChange);
+                document.getElementById('EUR_USD-pct').className = eurusdpct >= 0 ? 'up' : 'down';
+
+                const gbp = fx.GPBBRL;
+                document.getElementById('GBP_BRL-bid').textContent = gbp.bid;
+                document.getElementById('GBP_BRL-ask').textContent = gbp.ask;
+                document.getElementById('GBP_BRL-max').textContent = gbp.high;
+                document.getElementById('GBP_BRL-min').textContent = gbp.low;
+                document.getElementById('GBP_BRL-pct').textContent = gbp.pctChange + '%';
+                const gbppct = parseFloat(gbp.pctChange);
+                document.getElementById('GBP_BRL-pct').className = gbppct >= 0 ? 'up' : 'down';
+
+                const jpy = fx.JPYBRL;
+                document.getElementById('JPY_BRL-bid').textContent = jpy.bid;
+                document.getElementById('JPY_BRL-ask').textContent = jpy.ask;
+                document.getElementById('JPY_BRL-max').textContent = jpy.high;
+                document.getElementById('JPY_BRL-min').textContent = jpy.low;
+                document.getElementById('JPY_BRL-pct').textContent = jpy.pctChange + '%';
+                const jpypct = parseFloat(jpy.pctChange);
+                document.getElementById('JPY_BRL-pct').className = jpypct >= 0 ? 'up' : 'down';
+
+                const btc = fx.BTCBRL;
+                document.getElementById('BTC-brl').textContent = 'R$ ' + btc.bid;
+                const btcpct = parseFloat(btc.pctChange);
+                document.getElementById('BTC-var').textContent = btcpct + '%';
+                document.getElementById('BTC-var').className = btcpct >= 0 ? 'up' : 'down';
+                document.getElementById('previsao-BTC-var').textContent = btcpct + '%';
+                document.getElementById('previsao-BTC-var').className = btcpct >= 0 ? 'up' : 'down';
+
+                const eth = fx.ETHBRL;
+                document.getElementById('ETH-brl').textContent = 'R$ ' + eth.bid;
+                const ethpct = parseFloat(eth.pctChange);
+                document.getElementById('ETH-var').textContent = ethpct + '%';
+                document.getElementById('ETH-var').className = ethpct >= 0 ? 'up' : 'down';
+                document.getElementById('previsao-ETH-var').textContent = ethpct + '%';
+                document.getElementById('previsao-ETH-var').className = ethpct >= 0 ? 'up' : 'down';
+            }
+
+            // Atualizar acoes da carteira
+            const tickers = ['PETR4.SA','VALE3.SA','ITUB4.SA','BBDC4.SA','WEGE3.SA','SUZB3.SA','CPFE3.SA','FLRY3.SA','VIVT3.SA','TOTS3.SA'];
+            for (const t of tickers) {
+                const d = await buscarYahoo(t, t);
+                if (d) {
+                    const nome = t.replace('.SA','');
+                    const p = d.price.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+                    const c = d.change.toFixed(2);
+                    const elPreco = document.getElementById(nome + '-preco');
+                    const elVar = document.getElementById(nome + '-var');
+                    if (elPreco) elPreco.textContent = 'R$ ' + p;
+                    if (elVar) {
+                        elVar.textContent = (d.change >= 0 ? '+' : '') + c + '%';
+                        elVar.className = d.change >= 0 ? 'up' : 'down';
+                    }
+                }
+            }
+
+            // Atualizar indices globais
+            const indices = [
+                {sym:'%5EGSPC', pre:'SP500'},
+                {sym:'%5ENDX', pre:'NDX'},
+                {sym:'%5EDJI', pre:'DJI'}
+            ];
+            for (const idx of indices) {
+                const d = await buscarYahoo(idx.sym, idx.pre);
+                if (d) {
+                    const p = d.price.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+                    const c = d.change.toFixed(2);
+                    document.getElementById(idx.pre + '-preco').textContent = p;
+                    const elVar = document.getElementById(idx.pre + '-var');
+                    elVar.textContent = (d.change >= 0 ? '+' : '') + c + '%';
+                    elVar.className = d.change >= 0 ? 'up' : 'down';
+                }
+            }
+
+            // Atualizar BTC/USD
+            const btcd = await buscarYahoo('BTC-USD', 'BTC');
+            if (btcd) {
+                const p = btcd.price.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+                const c = btcd.change.toFixed(2);
+                document.getElementById('BTC-usd').textContent = '$ ' + p;
+                const btcpct = parseFloat(c);
+                document.getElementById('BTC-var').textContent = (btcd.change >= 0 ? '+' : '') + c + '%';
+                document.getElementById('BTC-var').className = btcd.change >= 0 ? 'up' : 'down';
+                document.getElementById('previsao-BTC').textContent = '$ ' + p;
+                document.getElementById('previsao-BTC-var').textContent = (btcd.change >= 0 ? '+' : '') + c + '%';
+                document.getElementById('previsao-BTC-var').className = btcd.change >= 0 ? 'up' : 'down';
+            }
+
+            // Atualizar ETH/USD
+            const ethd = await buscarYahoo('ETH-USD', 'ETH');
+            if (ethd) {
+                const p = ethd.price.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+                const c = ethd.change.toFixed(2);
+                document.getElementById('ETH-usd').textContent = '$ ' + p;
+                document.getElementById('previsao-ETH').textContent = '$ ' + p;
+                document.getElementById('ETH-var').textContent = (ethd.change >= 0 ? '+' : '') + c + '%';
+                document.getElementById('ETH-var').className = ethd.change >= 0 ? 'up' : 'down';
+                document.getElementById('previsao-ETH-var').textContent = (ethd.change >= 0 ? '+' : '') + c + '%';
+                document.getElementById('previsao-ETH-var').className = ethd.change >= 0 ? 'up' : 'down';
+            }
+
+            // Atualizar Ouro
+            const gold = await buscarYahoo('GC%3DF', 'GOLD');
+            if (gold) {
+                const p = gold.price.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+                const c = gold.change.toFixed(2);
+                document.getElementById('GOLD-preco').textContent = '$ ' + p;
+                document.getElementById('GOLD-var').textContent = (gold.change >= 0 ? '+' : '') + c + '%';
+                document.getElementById('GOLD-var').className = gold.change >= 0 ? 'up' : 'down';
+                document.getElementById('previsao-XAU').textContent = '$ ' + p;
+                document.getElementById('previsao-XAU-var').textContent = (gold.change >= 0 ? '+' : '') + c + '%';
+                document.getElementById('previsao-XAU-var').className = gold.change >= 0 ? 'up' : 'down';
+            }
+
+            // Atualizar WTI
+            const wti = await buscarYahoo('CL%3DF', 'WTI');
+            if (wti) {
+                const p = wti.price.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+                const c = wti.change.toFixed(2);
+                document.getElementById('WTI-preco').textContent = '$ ' + p;
+                document.getElementById('WTI-var').textContent = (wti.change >= 0 ? '+' : '') + c + '%';
+                document.getElementById('WTI-var').className = wti.change >= 0 ? 'up' : 'down';
+            }
+
+            // Atualizar Brent
+            const brent = await buscarYahoo('BZ%3DF', 'BRENT');
+            if (brent) {
+                const p = brent.price.toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2});
+                const c = brent.change.toFixed(2);
+                document.getElementById('BRENT-preco').textContent = '$ ' + p;
+                document.getElementById('BRENT-var').textContent = (brent.change >= 0 ? '+' : '') + c + '%';
+                document.getElementById('BRENT-var').className = brent.change >= 0 ? 'up' : 'down';
             }
         }
 
-        // Atualizar dados ao carregar página
+        // Inicializar ao carregar
         document.addEventListener('DOMContentLoaded', function() {
-            atualizarTimestamp();
+            atualizarDados();
         });
 
-        // Atualizar timestamp a cada minuto
-        setInterval(atualizarTimestamp, 60000);
-
-        // Atualizar indicadores a cada 5 minutos
-        setInterval(function() {
-            atualizarTimestamp();
-        }, 300000);
+        // Atualizar a cada 60 segundos
+        setInterval(atualizarDados, 60000);
     </script>
 </body>
-</html>
+</html>ooter>iv>iv>
